@@ -4,8 +4,6 @@ export const Container = styled.section`
     display: flex;
     flex-direction: column;
     max-width: 522px;
-    
-  }
 `;
 
 export const H1 = styled.h1`
@@ -74,8 +72,22 @@ export const EmailInput = styled.input`
 
 `;
 
-export const MessageInput = styled.input`
-     
+export const MessageInput = styled.textarea`
+    border: none;
+    background-color: #1E1E1E; 
+    height: 150px;
+    border-radius: 8px;
+    border: 0.5px solid #1E1E1E;
+    padding: 16px 16px;
+    color: white;
+    font-size: 14px;
+    resize: none;
+
+    &:focus {
+        outline: none;
+        border: 0.5px solid #05F324;
+        box-shadow: 0px 0px 1px 1.5px rgba(5, 243, 36, 0.17);
+    }
 `;
 
 export const SubmitBtn = styled.button`
@@ -89,4 +101,21 @@ export const SubmitBtn = styled.button`
     font-size: 14px;
 `;
 
-
+export const SuccessfulMessage = styled.div`
+    background-color: #05F324;
+    padding: 14px 24px;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    transition: 4s;
+    display: ${props => props.suceful ? "flex" :  "none"};
+    span {
+        font-weight: bold;
+    }
+    svg {
+        box-sizing: content-box;
+        padding: 4px;
+        background-color: #00e51e;
+        border-radius: 100%;
+    }
+`;

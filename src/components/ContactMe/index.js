@@ -9,22 +9,54 @@ import {
     NameInput,
     EmailInput,
     MessageInput,
-    SubmitBtn
+    SubmitBtn,
+    SuccessfulMessage
 } from "./style";
 
 import { 
     MdOutlinePushPin,
     MdOutlinePhone,
-    MdOutlineEmail
+    MdOutlineEmail,
+    MdClose
 } from "react-icons/md";
 
+import { useState } from "react";
+
+import emailjs from 'emailjs-com';
+
 function ContactMe() {
+
+    const [templateParams, setTemplateParams] = useState({});
+    const [suceful, setSuceful] = useState(false);    
+
+    function handleChange(key,value) {
+        setTemplateParams({...templateParams,[key]: value});
+    } 
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        console.log(templateParams)
+        if (templateParams.message && templateParams.name && templateParams.email) {
+            emailjs.send("service_vbg52th","template_ll8clkq", templateParams, "user_vzvduYqHHVyINS1w4Folm")
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+            setSuceful(true)
+        }
+      };
+      
     return(
 
         <Container>
-            <H1>Contact</H1>
+            <SuccessfulMessage suceful={suceful}>
+                <p><span>Success!</span> Your message was send.</p> 
+                <MdClose onClick={() => setSuceful(!suceful)}/>
+            </SuccessfulMessage>
+            <H1>Contact Me</H1>
 
-            <P>Fill up the form and our team will get back to you within 24 hours</P>
+            <P>Fill up the form and I will get back to you within 24 hours</P>
                 
             <Contact>
                 <Icon>
@@ -45,11 +77,21 @@ function ContactMe() {
                 <Value>igorcarvalhh@gmail.com</Value>
             </Contact>
             
-            <Form>
-                <NameInput placeholder="Name"></NameInput>
-                <EmailInput placeholder="Email"></EmailInput>
-                <MessageInput placeholder="Message"/>
-                <SubmitBtn>SEND MESSAGE</SubmitBtn>
+            <Form onSubmit={sendEmail}>
+                <NameInput 
+                    placeholder="Name" 
+                    onChange={e => handleChange("name",e.target.value)}
+                ></NameInput>
+                <EmailInput 
+                    placeholder="Email"
+                    onChange={e => handleChange("email",e.target.value)}
+                ></EmailInput>
+                <MessageInput 
+                    type="message" 
+                    placeholder="Message"
+                    onChange={e => handleChange("message",e.target.value)}
+                />
+                <SubmitBtn type="submit">SEND MESSAGE</SubmitBtn>
             </Form>
         </Container>
     );

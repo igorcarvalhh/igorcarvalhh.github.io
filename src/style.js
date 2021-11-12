@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Typewriter from 'typewriter-effect';
 
 export const Container = styled.div`
-    margin: 0 24px;
-    height: 90vh;
+    margin: 16px 24px;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
