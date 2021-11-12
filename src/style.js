@@ -2,12 +2,18 @@ import styled from "styled-components";
 import Typewriter from 'typewriter-effect';
 
 export const Container = styled.div`
-    min-width: 880px;
+    margin: 0 24px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 `;
 
 export const Home = styled.div`
-    margin: 60px 17% ;
-    text-align: left;
+    
+    
     h3 { 
         font-size: 24px;
         font-weight: normal;
@@ -52,3 +58,13 @@ export const Home = styled.div`
         margin-top: 40px;
     }
 `
+
+export const ContactMe = styled.section`
+    display: flex;
+    flex-direction: column;
+
+`;
+
+export const H1 = styled.h1`
+
+`;
