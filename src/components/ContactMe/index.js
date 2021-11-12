@@ -10,7 +10,9 @@ import {
     EmailInput,
     MessageInput,
     SubmitBtn,
-    SuccessfulMessage
+    SuccessfulMessage,
+    Close,
+    Blur
 } from "./style";
 
 import { 
@@ -26,7 +28,7 @@ import emailjs from 'emailjs-com';
 
 function ContactMe() {
 
-    const [templateParams, setTemplateParams] = useState({});
+    const [templateParams, setTemplateParams] = useState({name: "", email: "", message: ""});
     const [suceful, setSuceful] = useState(false);    
 
     function handleChange(key,value) {
@@ -43,17 +45,26 @@ function ContactMe() {
             }, (error) => {
                 console.log(error.text);
             });
-            setSuceful(true)
+            setSuceful(true);
+            setTemplateParams({name: "", email: "", message: ""});
         }
-      };
+    };
       
     return(
-
+        <>
         <Container>
-            <SuccessfulMessage suceful={suceful}>
-                <p><span>Success!</span> Your message was send.</p> 
-                <MdClose onClick={() => setSuceful(!suceful)}/>
-            </SuccessfulMessage>
+            <Blur suceful={suceful}>
+                <SuccessfulMessage suceful={suceful}>
+                    <div className="success-text">
+                        <span>Success!</span> 
+                        <p>Your message was send.</p>
+                    </div>
+
+                    <Close>
+                        <MdClose onClick={() => setSuceful(!suceful)}/>
+                    </Close>
+                </SuccessfulMessage>
+            </Blur>
             <H1>Contact Me</H1>
 
             <P>Fill up the form and I will get back to you within 24 hours</P>
@@ -68,7 +79,7 @@ function ContactMe() {
                 <Icon>
                     <MdOutlinePushPin />
                 </Icon>
-                <Value>Rua Pedro de Carvalho, 230</Value>
+                <Value>Rio de Janeiro, Brasil</Value>
             </Contact>
             <Contact>
                 <Icon>
@@ -79,14 +90,17 @@ function ContactMe() {
             
             <Form onSubmit={sendEmail}>
                 <NameInput 
+                    value={templateParams.name}
                     placeholder="Name" 
                     onChange={e => handleChange("name",e.target.value)}
                 ></NameInput>
                 <EmailInput 
+                    value={templateParams.email}
                     placeholder="Email"
                     onChange={e => handleChange("email",e.target.value)}
                 ></EmailInput>
                 <MessageInput 
+                    value={templateParams.message}
                     type="message" 
                     placeholder="Message"
                     onChange={e => handleChange("message",e.target.value)}
@@ -94,6 +108,7 @@ function ContactMe() {
                 <SubmitBtn type="submit">SEND MESSAGE</SubmitBtn>
             </Form>
         </Container>
+        </>
     );
 }
 

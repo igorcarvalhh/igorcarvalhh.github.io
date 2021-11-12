@@ -102,20 +102,52 @@ export const SubmitBtn = styled.button`
 `;
 
 export const SuccessfulMessage = styled.div`
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
     background-color: #05F324;
     padding: 14px 24px;
     border-radius: 8px;
-    justify-content: space-between;
-    align-items: center;
-    transition: 4s;
     display: ${props => props.suceful ? "flex" :  "none"};
-    span {
+    gap: 16px;
+    min-width: 300px;
+    top: 32px;
+    z-index: 3;
+    .success-text {
+        display: flex;
+        flex-direction: column;
+    }
+    p {
+        display: inline;
+        
+    }
+    span {  
         font-weight: bold;
+        
     }
     svg {
+        background-color: #00cb1a;
+        border-radius: 100%;
         box-sizing: content-box;
         padding: 4px;
-        background-color: #00e51e;
-        border-radius: 100%;
     }
 `;
+
+export const Close = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+
+export const Blur = styled.div`
+    display: ${props => props.suceful ? "inline" :  "none"};
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000045;
+    backdrop-filter: blur(2px);
+    z-index: 2;
+    left: 0;
+    top: 0;
+`;
+
