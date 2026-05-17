@@ -1,17 +1,17 @@
 ---
 layout: page
-title: About
+title: Sobre mim
 permalink: /about/
 ---
 
-Hi, I’m Igor.
+Olá, eu sou Igor.
 
-This blog is a place where I share notes, tutorials, reflections, projects, and other things I enjoy learning about along the way. Most of the content revolves around technology, computing, automation, mathematics, infrastructure, and experimentation, but I also like exploring random topics whenever curiosity takes me there.
+Este blog é um espaço onde compartilho notas, tutoriais, reflexões, projetos e outras coisas que gosto de aprender ao longo do caminho. Grande parte do conteúdo gira em torno de tecnologia, computação, automação, matemática, infraestrutura e experimentação, mas também gosto de explorar assuntos aleatórios sempre que a curiosidade me leva até eles.
 
-I created this space mainly as a personal knowledge base — a place to document ideas, solutions, lessons learned, and things worth remembering — but also to share them with anyone who might find them useful or interesting.
+Criei este espaço principalmente como uma base de conhecimento pessoal — um lugar para documentar ideias, soluções, aprendizados e coisas que valem a pena lembrar — mas também para compartilhar tudo isso com qualquer pessoa que possa achar útil ou interessante.
 
-Some posts may be short notes, others may become detailed guides, experiments, or reflections. The common theme is simple: learning by building, testing, breaking, and understanding how things work.
+Alguns posts podem ser apenas anotações curtas; outros podem se tornar guias detalhados, experimentos ou reflexões. O tema em comum é simples: aprender construindo, testando, quebrando e entendendo como as coisas funcionam.
 
-Thanks for visiting.
+Obrigado pela visita.
 
 [jekyll-organization]: https://github.com/jekyll

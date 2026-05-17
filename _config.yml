@@ -16,7 +16,7 @@
 title: Igor Carvalho
 email: igorcarvalhh@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Notes, tutorials, reflections, projects, and other things I enjoy learning about and sharing. By Igor Carvalho
+  Notas, tutoriais, reflexões, projetos e outras coisas que gosto de aprender e compartilhar. Por Igor Carvalho.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
