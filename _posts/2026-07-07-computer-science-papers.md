@@ -15,13 +15,15 @@ Achei a seleção uma ótima referência de leitura e decidi utilizá-la como um
 
 ## Lista de artigos
 
-* [ ] *On Computable Numbers, with an Application to the Entscheidungsproblem* — **Alan Turing** (1936)
-* [ ] *A Mathematical Theory of Communication* — **Claude Shannon** (1948)
-* [ ] *The Perceptron* — **Frank Rosenblatt** (1958)
-* [ ] *Perceptrons* — **Marvin Minsky e Seymour Papert** (1969)
-* [ ] *Time, Clocks, and the Ordering of Events in a Distributed System* — **Leslie Lamport** (1978)
-* [ ] *Learning Representations by Back-propagating Errors* — **David Rumelhart, Geoffrey Hinton e Ronald Williams** (1986)
-* [ ] *The Anatomy of a Large-Scale Hypertextual Web Search Engine* — **Sergey Brin e Larry Page** (1998)
-* [ ] *ImageNet Classification with Deep Convolutional Neural Networks* — **Alex Krizhevsky, Ilya Sutskever e Geoffrey Hinton** (2012)
-* [ ] *Attention Is All You Need* — **Ashish Vaswani et al.** (2017)
-* [ ] *Language Models are Few-Shot Learners* — **Tom Brown et al.** (2020)
+* *On Computable Numbers, with an Application to the Entscheidungsproblem* — Alan Turing (1936)
+* *A Mathematical Theory of Communication* — Claude Shannon (1948)
+* *The Perceptron* — Frank Rosenblatt (1958)
+* *Perceptrons* — Marvin Minsky e Seymour Papert (1969)
+* *Time, Clocks, and the Ordering of Events in a Distributed System* — Leslie Lamport (1978)
+* *Learning Representations by Back-propagating Errors* — David Rumelhart, Geoffrey Hinton e Ronald Williams (1986)
+* *The Anatomy of a Large-Scale Hypertextual Web Search Engine* — Sergey Brin e Larry Page (1998)
+* *ImageNet Classification with Deep Convolutional Neural Networks* — Alex Krizhevsky, Ilya Sutskever e Geoffrey Hinton (2012)
+* *Attention Is All You Need* — Ashish Vaswani et al. (2017)
+* *Language Models are Few-Shot Learners* — Tom Brown et al. (2020)
+* *Bitcoin: A Peer-to-Peer Electronic Cash System* — Satoshi Nakamoto
+* *No Silver Bullet—Essence and Accident in Software Engineering* — Frederick P. Brooks, Jr
