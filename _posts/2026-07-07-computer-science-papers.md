@@ -3,19 +3,8 @@
 layout: post
 title: "Grandes artigos da Ciência da Computação"
 date: 2026-07-07
-
 categories: [ciência-da-computação, leituras]
-
-tags:
-  - ciência da computação
-  - artigos científicos
-  - história da computação
-  - teoria da computação
-  - inteligência artificial
-  - sistemas distribuídos
-  - machine learning
-  - deep learning
-
+tags: [ciência-da-computação, leituras]
 excerpt: "Uma lista de alguns dos artigos científicos mais influentes da história da Ciência da Computação. Pretendo utilizá-la como guia de estudos e complementar este post com resumos e anotações à medida que avançar nas leituras."
 ---
 
