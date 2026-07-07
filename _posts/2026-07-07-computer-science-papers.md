@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "Grandes artigos da Ciência da Computação"
