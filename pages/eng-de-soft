@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Igor Carvalho Ramos Leal" />
+  <title>Engenharia de Software</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* =========================================================
+   eng-software-light.css
+   Estilo (light mode) para a página de acompanhamento de Engenharia de Software
+   Uso: pandoc arquivo.md -s -o pagina.html -c eng-software-light.css
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg:           #FAFAF8;
+  --panel:        #FFFFFF;
+  --panel-border: #E2E4E0;
+  --text:         #1C1E22;
+  --muted:        #767D89;
+  --accent:       #0F8A7A;   /* concluído / trilho */
+  --accent-dim:   #BEE3DC;
+  --pending:      #D97757;   /* tarefa em aberto */
+  --link:         #2559C7;
+
+  --rail-x: 28px;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* trilho vertical contínuo atravessando toda a página, como um pipeline */
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 140px;
+  bottom: 60px;
+  left: var(--rail-x);
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-dim), var(--panel-border) 92%, transparent);
+  z-index: 0;
+}
+
+body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 32px 80px calc(var(--rail-x) + 40px);
+}
+
+/* ---------- cabeçalho do documento (title block do pandoc) ---------- */
+header#title-block-header {
+  margin-left: calc(-1 * (var(--rail-x) + 40px));
+  padding: 0 32px 32px calc(var(--rail-x) + 40px);
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--panel-border);
+}
+header#title-block-header::before {
+  content: "// tracking.log";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+h1.title {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+p.author {
+  font-family: var(--font-body);
+  color: var(--muted);
+  margin: 0;
+  font-size: 14px;
+}
+p.date { color: var(--muted); font-size: 13px; margin: 2px 0 0 0; }
+
+/* ---------- seções do conteúdo (cada "# Tópico" é um nó do pipeline) ---------- */
+h1:not(.title) {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 16px 0;
+  counter-increment: secao;
+  z-index: 1;
+}
+
+h1:not(.title)::before {
+  content: counter(secao, decimal-leading-zero);
+  position: absolute;
+  left: calc(-1 * (var(--rail-x) + 40px) + var(--rail-x) - 14px);
+  top: -1px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+body { counter-reset: secao; }
+
+/* ---------- listas de material (slides, vídeos, artigos) ---------- */
+ul {
+  list-style: none;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+li {
+  position: relative;
+  padding: 7px 14px 7px 30px;
+  margin: 4px 0;
+  font-size: 14.5px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+li:hover { background: var(--panel); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+
+li::before {
+  content: "→";
+  position: absolute;
+  left: 8px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* ---------- tarefas (checklist "- [ ]" / "- [x]") ---------- */
+li:has(input[type="checkbox"]) {
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  padding-left: 40px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+li:has(input[type="checkbox"])::before { content: ""; }
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--pending);
+  border-radius: 3px;
+  cursor: default;
+  margin: 0;
+  background: var(--panel);
+}
+input[type="checkbox"]:checked {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: -4px;
+  left: 1px;
+  font-size: 11px;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+li:has(input[type="checkbox"]:checked) {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent-dim);
+  border-color: var(--accent-dim);
+  background: #F3F9F7;
+}
+
+/* ---------- links (materiais e URLs) ---------- */
+a {
+  color: var(--link);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  border-bottom: 1px dotted transparent;
+}
+a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- diversos ---------- */
+hr {
+  border: none;
+  border-top: 1px dashed var(--panel-border);
+  margin: 32px 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+blockquote {
+  border-left: 3px solid var(--accent-dim);
+  margin: 16px 0;
+  padding: 4px 16px;
+  color: var(--muted);
+}
+
+::selection { background: var(--accent-dim); color: var(--text); }
+
+/* ---------- responsivo ---------- */
+@media (max-width: 640px) {
+  :root { --rail-x: 14px; }
+  body { padding: 40px 18px 60px calc(var(--rail-x) + 26px); }
+  header#title-block-header { padding-left: calc(var(--rail-x) + 26px); margin-left: calc(-1 * (var(--rail-x) + 26px)); }
+  h1.title { font-size: 24px; }
+  h1:not(.title)::before { left: calc(-1 * (var(--rail-x) + 26px) + var(--rail-x) - 14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  li { transition: none; }
+}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Engenharia de Software</h1>
+<p class="author">Igor Carvalho Ramos Leal</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#processomodelos-de-desenvolvimento-de-software"
+id="toc-processomodelos-de-desenvolvimento-de-software">Processo/modelos
+de desenvolvimento de software</a></li>
+<li><a href="#engenharia-de-requisitos-e-experiência-do-usuário"
+id="toc-engenharia-de-requisitos-e-experiência-do-usuário">Engenharia de
+Requisitos e Experiência do Usuário</a></li>
+<li><a href="#qualidade-de-software"
+id="toc-qualidade-de-software">Qualidade de software</a></li>
+<li><a href="#métricas" id="toc-métricas">Métricas</a></li>
+<li><a href="#planejamento-e-gerência-de-projetos-de-software"
+id="toc-planejamento-e-gerência-de-projetos-de-software">Planejamento e
+Gerência de projetos de software</a></li>
+<li><a href="#análise-de-riscos" id="toc-análise-de-riscos">Análise de
+riscos</a></li>
+<li><a href="#métodos-e-técnicas-de-análise-e-projeto-de-software"
+id="toc-métodos-e-técnicas-de-análise-e-projeto-de-software">Métodos e
+Técnicas de análise e projeto de software</a></li>
+<li><a href="#verificação-validade-e-teste-de-software"
+id="toc-verificação-validade-e-teste-de-software">Verificação, validade
+e teste de software</a></li>
+<li><a href="#modelagem-de-software"
+id="toc-modelagem-de-software">Modelagem de software</a></li>
+<li><a href="#gerência-de-configuração"
+id="toc-gerência-de-configuração">Gerência de Configuração</a></li>
+<li><a href="#documentação" id="toc-documentação">Documentação</a></li>
+<li><a href="#manutenção" id="toc-manutenção">Manutenção</a></li>
+<li><a href="#ferramentas-e-ambientes-de-software"
+id="toc-ferramentas-e-ambientes-de-software">Ferramentas e ambientes de
+software</a></li>
+<li><a href="#engenharia-de-software-e-ia"
+id="toc-engenharia-de-software-e-ia">Engenharia de Software e
+IA</a></li>
+<li><a href="#entrega-do-projeto" id="toc-entrega-do-projeto">Entrega do
+Projeto</a></li>
+</ul>
+</nav>
+<h1 id="processomodelos-de-desenvolvimento-de-software">Processo/modelos
+de desenvolvimento de software</h1>
+<ul>
+<li><a
+href="C:\Users\igorc\OneDrive\Área%20de%20Trabalho\UERJ\2026-1\Engenharia%20de%20Software\Slides\1%20-%20Aula%20Processos%20de%20Software.pdf">Slides
+Processos de Software</a></li>
+<li><a
+href="https://www.youtube.com/watch?v=CebVINDwDOw">Vídeoaula</a></li>
+<li><a
+href="https://agilemanifesto.org/iso/ptbr/manifesto.html">Manifesto
+ágil</a></li>
+<li><label><input type="checkbox" /><a
+href="https://docs.google.com/document/d/1pMxmN9GsRuIzkFPh1UpmEYzldQeMhYi2?rtpof=true&amp;usp=drive_fs">Tarefa
+individual 1 - Processo de software</a></label></li>
+</ul>
+<h1 id="engenharia-de-requisitos-e-experiência-do-usuário">Engenharia de
+Requisitos e Experiência do Usuário</h1>
+<ul>
+<li><a href="./Material%20Complementar/522-1531-1-PB.pdf">Artigo - Eng.
+Requisitos</a></li>
+<li><a
+href="./Slides/2%20-%20Aula%20Engenharia%20de%20Requistos.pdf">Slides
+Engenharia de Requisitos</a></li>
+<li><a href="https://www.youtube.com/watch?v=W6NS7dwRAyk">Videoaula -
+UX</a></li>
+<li><a href="https://www.youtube.com/watch?v=WAi6ixIfdd4">Vídeo -
+UX</a></li>
+<li><a
+href="https://www.devmedia.com.br/introducao-a-engenharia-de-requisitos/8034">Leitura
+- Eng. Requisitos</a></li>
+<li><a href="https://www.youtube.com/watch?v=jajQyzOpLaE">Vídeo - Eng.
+Requisitos</a></li>
+<li><a
+href="./Trabalhos/EngSoft-Persona.pdf">EngSoft-Persona.pdf</a></li>
+<li><label><input type="checkbox" /><a
+href="https://docs.google.com/document/d/15rsfgEwh5ULKvG3Csq-4y1gmQqIEGWxV?rtpof=true&amp;usp=drive_fs">Tarefa
+individual 2 - Requisitos</a></label></li>
+</ul>
+<h1 id="qualidade-de-software">Qualidade de software</h1>
+<ul>
+<li><a href="">Slides Qualidade de Software</a></li>
+<li><a href="">Capítulo do Livro Pressman - Qualidade</a></li>
+<li><a href="">Videoaula - Qualidade</a></li>
+</ul>
+<h1 id="métricas">Métricas</h1>
+<ul>
+<li><a href="">Slides Métricas</a></li>
+<li><a href="">Videoaula - Métricas</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 3 -
+Qualidade de Software e Métricas</a></label></li>
+</ul>
+<h1 id="planejamento-e-gerência-de-projetos-de-software">Planejamento e
+Gerência de projetos de software</h1>
+<ul>
+<li><a href="">Vídeo sobre estimativa de sofware</a></li>
+<li><a href="">Capítulo do Livro - Gerenciamento de Projetos</a></li>
+<li><a href="">Videoaula - Gerência de Projetos</a></li>
+<li><a href="">Slides Gerência de projetos</a></li>
+</ul>
+<h1 id="análise-de-riscos">Análise de riscos</h1>
+<ul>
+<li><a href="">Slides Análise de Riscos</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 4 -
+Gerência de software e análise de riscos</a></label></li>
+</ul>
+<h1 id="métodos-e-técnicas-de-análise-e-projeto-de-software">Métodos e
+Técnicas de análise e projeto de software</h1>
+<ul>
+<li><a href="">Slides Análise e Projeto de Software</a></li>
+</ul>
+<h1 id="verificação-validade-e-teste-de-software">Verificação, validade
+e teste de software</h1>
+<ul>
+<li><a href="">Slides Testes de Software</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 6 -
+Teste de sofware</a></label></li>
+</ul>
+<h1 id="modelagem-de-software">Modelagem de software</h1>
+<ul>
+<li><a href="">Capítulos de livro</a></li>
+<li><a href="">Introdução ao Projeto de Sistemas</a></li>
+<li><a href="">Video - Introdução Modelagem de Sistemas com UML</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 5 -
+Modelagem de software</a></label></li>
+</ul>
+<h1 id="gerência-de-configuração">Gerência de Configuração</h1>
+<ul>
+<li><a href="">Vídeoaula - Gerência de Configuração</a></li>
+<li><a href="">Artigo - Gerência de Configuração</a></li>
+<li><a href="">Slides Gerência de Configuração</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 7 -
+Gerência de configuração</a></label></li>
+</ul>
+<h1 id="documentação">Documentação</h1>
+<ul>
+<li><a href="">Slides Documentação</a></li>
+</ul>
+<h1 id="manutenção">Manutenção</h1>
+<ul>
+<li><a href="">Slides Manutenção</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 8 -
+Documentação-Manutenção de software</a></label></li>
+</ul>
+<h1 id="ferramentas-e-ambientes-de-software">Ferramentas e ambientes de
+software</h1>
+<ul>
+<li><a href="">Slides Ferramentas</a></li>
+<li><a href="">Video - Ferramentas CASE</a></li>
+<li><a href="">Video</a></li>
+<li><label><input type="checkbox" /><a href="">Tarefa individual 9 -
+Ferramentas e ambientes de software</a></label></li>
+</ul>
+<h1 id="engenharia-de-software-e-ia">Engenharia de Software e IA</h1>
+<ul class="task-list">
+<li><label><input type="checkbox" /><a href="">Tarefa individual 10 -
+Engenharia de Software e IA</a></label></li>
+</ul>
+<h1 id="entrega-do-projeto">Entrega do Projeto</h1>
+<ul>
+<li><a href="">Projeto em grupo</a></li>
+</ul>
+</body>
+</html>
